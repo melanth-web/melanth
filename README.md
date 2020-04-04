@@ -1,2 +1,2 @@
 # melanth
-A lightweight framework for web application.\
+A lightweight framework for web application.
