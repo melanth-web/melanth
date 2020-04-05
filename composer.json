@@ -17,6 +17,9 @@
         }
     ],
     "autoload": {
+        "files": [
+            "src/framework/Support/helpers.php"
+        ],
         "psr-4": {
             "Melanth\\": "src/framework/"
         }
