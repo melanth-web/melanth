@@ -51,6 +51,21 @@ class CollectionTest extends TestCase
         $this->assertSame(1, Collection::make(new JsonSerializableStub)->count());
     }
 
+    public function testEach()
+    {
+        $items = new Collection([100, 200, 300, 400, 500]);
+
+        $items->each(function ($value) use (&$results) {
+            if ($value === 300) {
+                return false;
+            }
+
+            $results[] = $value;
+        });
+
+        $this->assertSame([100, 200], $results);
+    }
+
     public function testSet()
     {
         $items = new Collection;
@@ -68,6 +83,17 @@ class CollectionTest extends TestCase
         $this->assertNull((new Collection(['foo' => 'bar']))->get('bar'));
         $this->assertSame('baz', (new Collection(['foo' => 'bar']))->get('bar', 'baz'));
         $this->assertSame('bar', (new Collection(['foo' => 'bar']))->get('foo'));
+    }
+
+    public function testHas()
+    {
+        $this->assertTrue(Collection::make(['foo' => 'bar'])->has('foo'));
+    }
+
+    public function testRemove()
+    {
+        $this->assertSame(['foo' => null], Collection::make(['foo' => null, 'baz' => null])->remove('baz')->all());
+        $this->assertSame(['foo' => null], Collection::make(['foo' => null, 'bar' => null, 'baz' => null])->remove(['bar', 'baz'])->all());
     }
 
     public function testAdd()
@@ -111,12 +137,6 @@ class CollectionTest extends TestCase
         $items = Collection::make(['foo' => 'bar']);
         unset($items['foo']);
         $this->assertEmpty($items->all());
-    }
-
-    public function testRemove()
-    {
-        $this->assertSame(['foo' => null], Collection::make(['foo' => null, 'baz' => null])->remove('baz')->all());
-        $this->assertSame(['foo' => null], Collection::make(['foo' => null, 'bar' => null, 'baz' => null])->remove(['bar', 'baz'])->all());
     }
 
     public function testToArray()

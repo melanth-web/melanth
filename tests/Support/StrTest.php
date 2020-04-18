@@ -40,6 +40,7 @@ class StrTest extends TestCase
     public function testSnake()
     {
         $this->assertSame('foo_bar_baz', Str::snake('fooBarBaz'));
+        $this->assertSame('foo_bar_baz', Str::snake('fooBarBaz'));
         $this->assertSame('foo_bar_baz', Str::snake('Foo  Bar  Baz'));
 
         $this->assertSame('melanth_p_h_p_framework', Str::snake('MelanthPHPFramework'));
