@@ -41,7 +41,6 @@ interface Request
      */
     public function getHost() : string;
 
-
     /**
      * Get the port number with the request.
      *
