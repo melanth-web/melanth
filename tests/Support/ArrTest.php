@@ -155,4 +155,13 @@ class ArrTest extends TestCase
         $this->assertSame('default', Arr::first([], null, 'default'));
         $this->assertSame(1000, Arr::first(['foo' => 100, 'bar' => 1000], $callback));
     }
+
+    public function testWhere()
+    {
+        $values = Arr::where([100, '200', 300, '400', 500], function ($value) {
+            return is_string($value);
+        });
+
+        $this->assertSame([1 => '200', 3 => '400'], $values);
+    }
 }
