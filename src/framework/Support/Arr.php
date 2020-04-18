@@ -232,4 +232,17 @@ class Arr
 
         return value($default);
     }
+
+    /**
+     * Filter the array values using callabck.
+     *
+     * @param array    $array    The array values.
+     * @param callable $callback The given callback.
+     *
+     * @return array
+     */
+    public static function where($array, callable $callback) : array
+    {
+        return array_filter($array, $callback, ARRAY_FILTER_USE_BOTH);
+    }
 }
