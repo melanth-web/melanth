@@ -177,7 +177,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return $this
      */
-    public function set($key, $value) : self
+    public function set($key, $value)
     {
         if (is_null($key)) {
             $this->items[] = $value;
@@ -203,6 +203,18 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
         }
 
         return value($default);
+    }
+
+    /**
+     * Determine whether an item exists in the collection.
+     *
+     * @param string $key The given key.
+     *
+     * @return bool
+     */
+    public function has(string $key) : bool
+    {
+        return $this->offsetExists($key);
     }
 
     /**
