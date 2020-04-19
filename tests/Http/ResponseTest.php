@@ -4,7 +4,7 @@ namespace Melanth\Tests\Http;
 
 use Melanth\Contracts\Support\Arrayable;
 use Melanth\Contracts\Support\Jsonable;
-use Melanth\Http\Exception\HttpResponseException;
+use Melanth\Http\Exceptions\HttpResponseException;
 use Melanth\Http\Request;
 use Melanth\Http\Response;
 use PHPUnit\Framework\TestCase;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Melanth\Http\Exception;
+namespace Melanth\Http\Exceptions;
 
 use RuntimeException;
 use Melanth\Http\Response;

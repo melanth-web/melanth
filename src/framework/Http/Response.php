@@ -7,7 +7,7 @@ use JsonSerializable;
 use Melanth\Contracts\Http\Response as ResponseContract;
 use Melanth\Contracts\Support\Arrayable;
 use Melanth\Contracts\Support\Jsonable;
-use Melanth\Http\Exception\HttpResponseException;
+use Melanth\Http\Exceptions\HttpResponseException;
 
 class Response implements ResponseContract
 {
