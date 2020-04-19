@@ -43,8 +43,8 @@ class RouteRegistrator
     /**
      * Set the attribute to the router.
      *
-     * @param string $key   The attribute key.
-     * @param mixed  $value The given attribute value.
+     * @param string $key   The key name.
+     * @param mixed  $value The attribute value.
      *
      * @return $this
      */
@@ -72,7 +72,7 @@ class RouteRegistrator
     }
 
     /**
-     * Dynamically handel calls into the router.
+     * Dynamically handle calls into the router.
      *
      * @param string $method     The custom method.
      * @param array  $parameters The rest parameters.
