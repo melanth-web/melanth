@@ -126,7 +126,7 @@ class Request implements ArrayAccess, RequestContract
     }
 
     /**
-     * Create a new request instance.
+     * Create an instance directly.
      *
      * @param string               $url          The uniform resource identifier.
      * @param string               $method       The HTTP method.
@@ -140,7 +140,7 @@ class Request implements ArrayAccess, RequestContract
      */
     public static function create(
         string $url, string $method = 'GET', array $parameters = [], array $serverConfig = [], array $cookies = [], array $files = [], $content = null
-    ) : self {
+    ) : Request {
         $method = strtoupper($method);
         $parser = new UrlParser($url);
         [$query, $body] = static::parseQueryAndBody($method, $parameters);
@@ -182,7 +182,7 @@ class Request implements ArrayAccess, RequestContract
      *
      * @return $this
      */
-    public static function createFromGlobals() : self
+    public static function createFromGlobals() : Request
     {
         $request = new static($_GET, $_POST, $_SERVER, $_COOKIE, $_FILES);
 
@@ -200,7 +200,7 @@ class Request implements ArrayAccess, RequestContract
      *
      * @return $this
      */
-    public static function capture() : self
+    public static function capture() : Request
     {
         return static::createFromGlobals();
     }
@@ -368,7 +368,7 @@ class Request implements ArrayAccess, RequestContract
             return substr($this->headers->get('HOST'), $position + 1);
         }
 
-        return $this->getScheme() === 'https' ? self::HTTPS_PORT : self::HTTP_PORT;
+        return $this->getScheme() === 'https' ? self::HTTPS_PORT : Request::HTTP_PORT;
     }
 
     /**

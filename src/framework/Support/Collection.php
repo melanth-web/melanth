@@ -42,7 +42,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return static
      */
-    public static function make($items = []) : self
+    public static function make($items = []) : Collection
     {
         return new static($items);
     }
@@ -64,7 +64,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return void
      */
-    public function dd(...$arguments) : self
+    public function dd(...$arguments) : Collection
     {
         call_user_func_array([$this, 'dump'], $arguments);
 
@@ -78,7 +78,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return static
      */
-    public function diff($items) : self
+    public function diff($items) : Collection
     {
         return new static(array_diff($this->items, $this->getArrayableItems($items)));
     }
@@ -90,7 +90,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return static
      */
-    public function diffKeys($items) : self
+    public function diffKeys($items) : Collection
     {
         return new static(array_diff_key($this->items, $this->getArrayableItems($items)));
     }
@@ -102,7 +102,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return $this
      */
-    public function each(callable $callback) : self
+    public function each(callable $callback) : Collection
     {
         foreach ($this->items as $key => $item) {
             if ($callback($item, $key) === false) {
@@ -120,7 +120,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return static
      */
-    public function filter(callable $callback = null) : self
+    public function filter(callable $callback = null) : Collection
     {
         if ($callback) {
             return new static(Arr::where($this->items, $callback));
@@ -162,7 +162,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return $this
      */
-    public function add($item) : self
+    public function add($item) : Collection
     {
         $this->items[] = $item;
 
@@ -238,7 +238,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
      *
      * @return self
      */
-    public function values() : self
+    public function values() : Collection
     {
         return new static(array_values($this->items));
     }
