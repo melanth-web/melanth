@@ -2,7 +2,11 @@
 
 namespace Melanth\Tests\Foundation;
 
+use Melanth\Contracts\Http\Kernel as KernelContract;
 use Melanth\Foundation\Application;
+use Melanth\Foundation\Http\Kernel;
+use Melanth\Http\Request;
+use Melanth\Http\Response;
 use Melanth\Support\ServiceProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -18,6 +22,23 @@ class ApplicationTest extends TestCase
 
         $app = new Application('/foo/');
         $this->assertSame('/foo/bar', $app->path('bar'));
+    }
+
+    public function testHandleRequest()
+    {
+        $request = Request::create('/foo', 'GET');
+        $response = new Response;
+
+        $kernel = $this->createMock(Kernel::class);
+        $kernel->expects($this->once())
+            ->method('handle')
+            ->with($this->equalTo($request))
+            ->will($this->returnValue($response));
+
+        $app = new Application;
+        $app->instance(KernelContract::class, $kernel);
+
+        $this->assertSame($response, $app->handle($request));
     }
 
     public function testRegisterServiceProvider()
@@ -60,4 +81,3 @@ class ServiceProviderStub extends ServiceProvider
         });
     }
 }
-
