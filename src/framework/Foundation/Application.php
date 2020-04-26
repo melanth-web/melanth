@@ -4,6 +4,7 @@ namespace Melanth\Foundation;
 
 use Melanth\Container\Container;
 use Melanth\Contracts\Foundation\Application as ApplicationContract;
+use Melanth\Contracts\Http\Kernel as KernelContract;
 use Melanth\Contracts\Http\Request;
 use Melanth\Contracts\Http\Response;
 use Melanth\Support\ServiceProvider;
@@ -94,6 +95,18 @@ class Application extends Container implements ApplicationContract
     protected function registerBaseServiceProviders() : void
     {
         //
+    }
+
+    /**
+     * Handle an incoming request in the application.
+     *
+     * @param \Melanth\Http\Request $request The request instance.
+     *
+     * @return \Melanth\Http\Response
+     */
+    public function handle(Request $request) : Response
+    {
+        return $this[KernelContract::class]->handle($request);
     }
 
     /**
