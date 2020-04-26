@@ -348,9 +348,9 @@ class Router
     }
 
     /**
-     * Dispath the route to the controller.
+     * Dispatch an incoming request to the controller.
      *
-     * @param \Melanth\Http\Request $request The HTTP request instance.
+     * @param \Melanth\Http\Request $request The request instance.
      *
      * @return \Melanth\Http\Response
      */
@@ -362,7 +362,7 @@ class Router
     /**
      * Find the route by incoming request.
      *
-     * @param \Melanth\Http\Request The HTTP request instance.
+     * @param \Melanth\Http\Request The request instance.
      *
      * @return \Melanth\Routing\Route
      *
@@ -398,7 +398,7 @@ class Router
     /**
      * Run the route with the router.
      *
-     * @param \Melanth\Http\Request  $request The HTTP request instance.
+     * @param \Melanth\Http\Request  $request The request instance.
      * @param \Melanth\Routing\Route $route   The route instance.
      *
      * @return \Melanth\Http\Response
@@ -428,8 +428,8 @@ class Router
     /**
      * Resolve an incoming response.
      *
-     * @param \Melanth\Http\Request  $request  The HTTP request instance.
-     * @param \Melanth\Http\Response $response The HTTP response instance.
+     * @param \Melanth\Http\Request  $request  The request instance.
+     * @param \Melanth\Http\Response $response The response instance.
      *
      * @return \Melanth\Http\Response
      */

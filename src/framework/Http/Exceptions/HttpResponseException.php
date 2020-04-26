@@ -17,7 +17,7 @@ class HttpResponseException extends RuntimeException
     /**
      * Create a new HTTP response exception.
      *
-     * @param \Melanth\Http\Response $response The HTTP response instance.
+     * @param \Melanth\Http\Response $response The response instance.
      *
      * @return void
      */

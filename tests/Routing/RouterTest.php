@@ -198,14 +198,19 @@ class RouterTest extends TestCase
 
     public function testDispatchRouteAndUrlNotMatch()
     {
-        $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('');
-
         $router = new Router(new Container);
+
         $router->get('foo/bar', function () {
             return 'Hello World';
         });
-        $router->dispatch(Request::create('foo'));
+
+        try {
+            $router->dispatch(Request::create('foo'));
+        } catch (NotFoundHttpException $e) {
+            $this->assertInstanceof(NotFoundHttpException::class, $e);
+            $this->assertSame(Response::HTTP_NOT_FOUND, $e->getStatusCode());
+            $this->assertEmpty($e->getHeaders());
+        }
     }
 
     public function testDispatchRouteAndMethodNotMatch()

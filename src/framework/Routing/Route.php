@@ -56,7 +56,7 @@ class Route
     /**
      * Bind the URI parametres with route names.
      *
-     * @param \Melanth\Http\Request $request The HTTP request instance.
+     * @param \Melanth\Http\Request $request The request instance.
      *
      * @return $this
      */

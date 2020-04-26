@@ -28,7 +28,7 @@ class RouteParameterBinder
     /**
      * Bind the parameters with route names.
      *
-     * @param \Melanth\Http\Request $request The HTTP request instance.
+     * @param \Melanth\Http\Request $request The request instance.
      *
      * @return array
      */

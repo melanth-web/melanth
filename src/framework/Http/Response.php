@@ -471,7 +471,7 @@ class Response implements ResponseContract
     /**
      * Prepare to handle an incoming HTTP request.
      *
-     * @param \Melanth\Http\Request $requesst The HTTP request instance.
+     * @param \Melanth\Http\Request $requesst The request instance.
      *
      * @return $this
      */

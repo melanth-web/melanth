@@ -11,7 +11,7 @@ class UriValidator
      * Validate the given rule against a route and request.
      *
      * @param \Melanth\Routing\Route $route   The route instance.
-     * @param \Melanth\Http\Request  $request The HTTP request instance.
+     * @param \Melanth\Http\Request  $request The request instance.
      *
      * @return bool
      */
