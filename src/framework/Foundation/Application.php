@@ -101,7 +101,7 @@ class Application extends Container implements ApplicationContract
      */
     public function appPath(string $path = '')
     {
-        return $this->path('app' . ($path ? DIRECTORY_SEPARATOR.$path : $path));
+        return $this->path('app'.($path ? DIRECTORY_SEPARATOR.$path : $path));
     }
 
     /**
@@ -113,7 +113,7 @@ class Application extends Container implements ApplicationContract
      */
     public function bootstrapPath(string $path = '')
     {
-        return $this->path('bootstrap' . ($path ? DIRECTORY_SEPARATOR.$path : $path));
+        return $this->path('bootstrap'.($path ? DIRECTORY_SEPARATOR.$path : $path));
     }
 
     /**
@@ -125,7 +125,7 @@ class Application extends Container implements ApplicationContract
      */
     public function configPath($path = '')
     {
-        return $this->path('config' . ($path ? DIRECTORY_SEPARATOR.$path : $path));
+        return $this->path('config'.($path ? DIRECTORY_SEPARATOR.$path : $path));
     }
 
     /**
