@@ -3,6 +3,9 @@
 namespace Melanth\Tests\Foundation;
 
 use Melanth\Foundation\Application;
+use Melanth\Foundation\Bootstrap\ConfigurationLoader;
+use Melanth\Foundation\Bootstrap\RegisterProviders;
+use Melanth\Foundation\Bootstrap\BootProviders;
 use Melanth\Foundation\Http\Kernel;
 use Melanth\Http\Request;
 use Melanth\Http\Response;
@@ -20,6 +23,11 @@ class KernelTest extends TestCase
 
         $this->app = new Application;
         $this->kernel = new Kernel($this->app);
+
+        $this->app->instance(ConfigurationLoader::class, $this->createMock(ConfigurationLoader::class));
+        $this->app->instance(RegisterProviders::class, $this->createMock(RegisterProviders::class));
+        $this->app->instance(BootProviders::class, $this->createMock(BootProviders::class));
+        $this->app->instance('router', $this->createMock(Router::class));
     }
 
     public function tearDown() : void
@@ -35,16 +43,12 @@ class KernelTest extends TestCase
         $request = Request::create('/foo');
         $response = new Response;
 
-        $router = $this->createMock(Router::class);
-        $router->expects($this->once())
+        $this->app['router']->expects($this->once())
             ->method('dispatch')
             ->with($this->equalTo($request))
             ->will($this->returnValue($response));
 
-        $this->app->instance('router', $router);
-
-        $actual = $this->kernel->handle($request);
-        $this->assertInstanceOf(Response::class, $actual);
+        $this->assertSame($response, $this->kernel->handle($request));
     }
 
     public function testBootstrap()

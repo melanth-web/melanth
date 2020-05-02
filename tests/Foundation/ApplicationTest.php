@@ -17,11 +17,20 @@ class ApplicationTest extends TestCase
         $app = new Application;
         $this->assertSame('/foo', $app->path('foo'));
 
-        $app = new Application(__DIR__);
-        $this->assertSame(__DIR__.'/foo', $app->path('foo'));
-
         $app = new Application('/foo/');
         $this->assertSame('/foo/bar', $app->path('bar'));
+
+        $app = new Application(__DIR__);
+        $this->assertSame(__DIR__, $app->path());
+        $this->assertSame(__DIR__.'/foo', $app->path('foo'));
+        $this->assertSame(__DIR__.'/app', $app->appPath());
+        $this->assertSame(__DIR__.'/config', $app->configPath());
+        $this->assertSame(__DIR__.'/bootstrap', $app->bootstrapPath());
+
+        $this->assertSame(__DIR__, $app['path']);
+        $this->assertSame(__DIR__.'/app', $app['path.app']);
+        $this->assertSame(__DIR__.'/bootstrap', $app['path.bootstrap']);
+        $this->assertSame(__DIR__.'/config', $app['path.config']);
     }
 
     public function testHandleRequest()
