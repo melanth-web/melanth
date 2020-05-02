@@ -27,6 +27,16 @@ class Finder implements Countable, IteratorAggregate
     protected $directories = [];
 
     /**
+     * Create a new finder instance.
+     *
+     * @return \Melanth\Filesystem\Finder
+     */
+    public static function create() : Finder
+    {
+        return new static;
+    }
+
+    /**
      * Set filename patterns.
      *
      * @param string|array $names The filename patterns.

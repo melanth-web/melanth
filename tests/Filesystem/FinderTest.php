@@ -5,6 +5,7 @@ namespace Melanth\Tests\Filesystem;
 use InvalidArgumentException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use UnexpectedValueException;
 use Melanth\Filesystem\Finder;
 use Melanth\Tests\Foundation\TestCase;
 
@@ -60,5 +61,12 @@ class FinderTest extends TestCase
         );
 
         $this->assertSame(count(iterator_to_array($iterator)), count((new Finder)->in(__DIR__.'/fixtures')));
+    }
+
+    public function testGetFilesWithInvalidDirectory()
+    {
+        $this->expectException(UnexpectedValueException::class);
+
+        iterator_to_array(Finder::create()->in('baz'));
     }
 }

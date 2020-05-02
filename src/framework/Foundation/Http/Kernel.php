@@ -15,7 +15,9 @@ class Kernel implements KernelContract
      * @var array
      */
     protected $bootstrapers = [
-        //
+        \Melanth\Foundation\Bootstrap\ConfigurationLoader::class,
+        \Melanth\Foundation\Bootstrap\RegisterProviders::class,
+        \Melanth\Foundation\Bootstrap\BootProviders::class
     ];
 
     /**
@@ -46,7 +48,7 @@ class Kernel implements KernelContract
      */
     public function handle(Request $request) : Response
     {
-        return $this->handleIncomingRequest($request);
+        return $this->dispatchToRouer($request);
     }
 
     /**
@@ -56,7 +58,7 @@ class Kernel implements KernelContract
      *
      * @return \Melanth\Http\Response
      */
-    protected function handleIncomingRequest(Request $request) : Response
+    protected function dispatchToRouer(Request $request) : Response
     {
         $this->app->instance('request', $request);
 

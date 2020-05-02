@@ -7,6 +7,7 @@ use Melanth\Contracts\Foundation\Application as ApplicationContract;
 use Melanth\Contracts\Http\Kernel as KernelContract;
 use Melanth\Contracts\Http\Request;
 use Melanth\Contracts\Http\Response;
+use Melanth\Routing\RouteServiceProvider;
 use Melanth\Support\ServiceProvider;
 
 class Application extends Container implements ApplicationContract
@@ -47,6 +48,7 @@ class Application extends Container implements ApplicationContract
 
         $this->registerBaseBinding();
         $this->registerBaseServiceProviders();
+        $this->registerContainerAliases();
     }
 
     /**
@@ -60,7 +62,22 @@ class Application extends Container implements ApplicationContract
     {
         $this->basePath = rtrim($basePath, '\/');
 
+        $this->mountApplicationPath();
+
         return $this;
+    }
+
+    /**
+     * Bind all of the application paths in the container.
+     *
+     * @return void
+     */
+    protected function mountApplicationPath() : void
+    {
+        $this->instance('path', $this->path());
+        $this->instance('path.app', $this->appPath());
+        $this->instance('path.config', $this->configPath());
+        $this->instance('path.bootstrap', $this->bootstrapPath());
     }
 
     /**
@@ -73,6 +90,42 @@ class Application extends Container implements ApplicationContract
     public function path(string $path = '') : string
     {
         return $this->basePath.($path ? DIRECTORY_SEPARATOR.$path : $path);
+    }
+
+    /**
+     * Get the path of app directory.
+     *
+     * @param string $path The path append to the app path.
+     *
+     * @return string
+     */
+    public function appPath(string $path = '')
+    {
+        return $this->path('app' . ($path ? DIRECTORY_SEPARATOR.$path : $path));
+    }
+
+    /**
+     * Get the path of bootstrap directory.
+     *
+     * @param string $path The path append to the bootstrap path.
+     *
+     * @return string
+     */
+    public function bootstrapPath(string $path = '')
+    {
+        return $this->path('bootstrap' . ($path ? DIRECTORY_SEPARATOR.$path : $path));
+    }
+
+    /**
+     * Get the path of config directory.
+     *
+     * @param string $path The path append to the bootstrap path.
+     *
+     * @return string
+     */
+    public function configPath($path = '')
+    {
+        return $this->path('config' . ($path ? DIRECTORY_SEPARATOR.$path : $path));
     }
 
     /**
@@ -94,7 +147,25 @@ class Application extends Container implements ApplicationContract
      */
     protected function registerBaseServiceProviders() : void
     {
-        //
+        $this->register(RouteServiceProvider::class);
+    }
+
+    /**
+     * Register the core base bindings aliases into the container.
+     *
+     * @return void
+     */
+    protected function registerContainerAliases() : void
+    {
+        foreach ([
+            'app'    => [\Melanth\Foundation\Application::class, \Melanth\Contracts\Foundation\Application::class],
+            'config' => [\Melanth\Foundation\Config::class],
+            'router' => [\Melanth\Routing\Router::class, \Melanth\Contracts\Routing\Router::class],
+        ] as $key => $aliases) {
+            foreach ($aliases as $alias) {
+                $this->alias($key, $alias);
+            }
+        }
     }
 
     /**
