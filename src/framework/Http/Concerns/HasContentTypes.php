@@ -39,14 +39,10 @@ trait HasContentTypes
     /**
      * Determine whether the request is sending json format.
      *
-     * @param string|null $type The content type.
-     *
      * @return bool
      */
-    public function isJson(string $type = null) : bool
+    public function isJson() : bool
     {
-        $type = $type ?: $this->headers->get('CONTENT_TYPE');
-
-        return Str::contains($type, ['/json', '+json']);
+        return Str::contains($this->headers->get('CONTENT_TYPE'), ['/json', '+json']);
     }
 }

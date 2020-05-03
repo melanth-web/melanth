@@ -2,6 +2,7 @@
 
 namespace Melanth\Tests\Http;
 
+use JsonSerializable;
 use Melanth\Contracts\Support\Arrayable;
 use Melanth\Contracts\Support\Jsonable;
 use Melanth\Http\Exceptions\HttpResponseException;
@@ -169,6 +170,10 @@ class ResponseTest extends TestCase
         $this->assertSame('{"foo":"bar"}', $response->getContent());
         $this->assertSame('application/json', $response->headers()->get('Content-Type'));
 
+        $response = new Response(new JsonSerializableStub);
+        $this->assertSame('{"foo":"bar"}', $response->getContent());
+        $this->assertSame('application/json', $response->headers()->get('Content-Type'));
+
         $response = new Response(new ArrayableAndJsonStub);
         $this->assertSame('{"foo":"bar"}', $response->getContent());
         $this->assertSame('application/json', $response->headers()->get('Content-Type'));
@@ -224,6 +229,14 @@ class JsonableStub implements Jsonable
     public function toJson($options = 0) : string
     {
         return '{"foo":"bar"}';
+    }
+}
+
+class JsonSerializableStub implements JsonSerializable
+{
+    public function jsonSerialize()
+    {
+        return ['foo' => 'bar'];
     }
 }
 
