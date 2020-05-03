@@ -334,6 +334,34 @@ class Response implements ResponseContract
     public const HTTP_FAILED_DEPENDENCY = 424;
 
     /**
+     * The HTTP response status code.
+     *
+     * @var int
+     */
+    public const HTTP_INTERNAL_SERVER_ERROR = 500;
+
+    /**
+     * The HTTP response status code.
+     *
+     * @var int
+     */
+    public const HTTP_NOT_IMPLEMENTED = 501;
+
+    /**
+     * The HTTP response status code.
+     *
+     * @var int
+     */
+    public const HTTP_BAD_GATEWAY = 502;
+
+    /**
+     * The HTTP response status code.
+     *
+     * @var int
+     */
+    public const HTTP_SERVICE_UNAVAILABLE = 503;
+
+    /**
      * The mapping of the response status representation.
      *
      * @var array
