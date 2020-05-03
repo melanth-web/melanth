@@ -15,7 +15,7 @@ class HttpException extends RuntimeException
     protected $statusCode;
 
     /**
-     * The HTTP header stack.
+     * The HTTP header entities.
      *
      * @var array
      */
@@ -25,7 +25,7 @@ class HttpException extends RuntimeException
      * Create a new HTTP exception instance.
      *
      * @param int        $statusCode The HTTP status code.
-     * @param string     $message    The given message body.
+     * @param string     $message    The message body.
      * @param \Exception $previous   The previous exception instance.
      * @param array      $headers    The headers entities.
      * @param int        $code       The internal exception code.
@@ -52,7 +52,7 @@ class HttpException extends RuntimeException
     }
 
     /**
-     * Get header entities.
+     * Get HTTP header entities.
      *
      * @return array
      */

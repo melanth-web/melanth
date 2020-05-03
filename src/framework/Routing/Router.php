@@ -403,7 +403,7 @@ class Router
      *
      * @return \Melanth\Http\Response
      */
-    protected function runRoute(Request $request, Route $route)
+    protected function runRoute(Request $request, Route $route) : Response
     {
         return (new Pipeline($this->container))
                 ->via($request)
@@ -428,12 +428,12 @@ class Router
     /**
      * Resolve an incoming response.
      *
-     * @param \Melanth\Http\Request  $request  The request instance.
-     * @param \Melanth\Http\Response $response The response instance.
+     * @param \Melanth\Http\Request $request  The request instance.
+     * @param mixed                 $response The response instance.
      *
      * @return \Melanth\Http\Response
      */
-    public static function toResponse($request, $response) : Response
+    public static function toResponse(Request $request, $response) : Response
     {
         if (! $response instanceof Response) {
             $response = new Response($response);

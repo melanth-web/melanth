@@ -613,8 +613,10 @@ class Response implements ResponseContract
     {
         if ($content instanceof Jsonable) {
             return $content->toJson();
+        } elseif ($content instanceof JsonSerializable) {
+            $content = $content->jsonSerialize();
         } elseif ($content instanceof Arrayable) {
-            return json_encode($content->toArray());
+            $content = $content->toArray();
         }
 
         return json_encode($content);
@@ -742,6 +744,20 @@ class Response implements ResponseContract
     }
 
     /**
+     * Set HTTP status code with the response.
+     *
+     * @param int $statusCode The HTTP status code.
+     *
+     * @return \Melanth\Http\Response
+     */
+    public function setStatusCode(int $stautsCode) : Response
+    {
+        $this->statusCode = $stautsCode;
+
+        return $this;
+    }
+
+    /**
      * Get the status code with the response.
      *
      * @return int
@@ -762,13 +778,23 @@ class Response implements ResponseContract
     }
 
     /**
-     * Get HTTP headers collection.
+     * Get HTTP header entities.
      *
      * @return \Melanth\Http\Headers
      */
     public function headers() : Headers
     {
         return $this->headers;
+    }
+
+    /**
+     * Get HTTP header entities.
+     *
+     * @return \Melanth\Http\Headers
+     */
+    public function getHeaders() : Headers
+    {
+        return $this->headers();
     }
 
     /**

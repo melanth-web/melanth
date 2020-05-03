@@ -2,10 +2,12 @@
 
 namespace Melanth\Foundation\Http;
 
+use Exception;
 use Melanth\Contracts\Http\Kernel as KernelContract;
 use Melanth\Contracts\Http\Request;
 use Melanth\Contracts\Http\Response;
 use Melanth\Foundation\Application;
+use Melanth\Http\ErrorHandler;
 
 class Kernel implements KernelContract
 {
@@ -48,7 +50,11 @@ class Kernel implements KernelContract
      */
     public function handle(Request $request) : Response
     {
-        return $this->dispatchToRouer($request);
+        try {
+            return $this->dispatchToRouer($request);
+        } catch (Exception $e) {
+            return $this->renderException($e);
+        }
     }
 
     /**
@@ -81,6 +87,18 @@ class Kernel implements KernelContract
         foreach ($this->getBootstrapers() as $bootstraper) {
             $this->app->make($bootstraper)->bootstrap($this->app);
         }
+    }
+
+    /**
+     * Render an exception to a response.
+     *
+     * @param \Exception $e An error exception instance.
+     *
+     * @return \Melanth\Http\Response
+     */
+    protected function renderException(Exception $e) : Response
+    {
+        return $this->app[ErrorHandler::class]->render($e);
     }
 
     /**

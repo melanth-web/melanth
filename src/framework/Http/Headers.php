@@ -13,7 +13,7 @@ class Headers extends Collection
      *
      * @return void
      */
-    public function __construct(array $headers)
+    public function __construct(array $headers = [])
     {
         parent::__construct($this->parseItems($headers));
     }
