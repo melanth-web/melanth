@@ -49,9 +49,6 @@ class BootstrapperTest extends TestCase
         $this->assertNull((new ConfigurationLoader)->bootstrap($app));
     }
 
-    /**
-	 * @runInSeparateProcess
-	 */
     public function testRegisterServiceProviders()
     {
         $config = new Config(['app' => ['providers' => ['foo']]]);
