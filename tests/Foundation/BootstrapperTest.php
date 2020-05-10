@@ -6,6 +6,7 @@ use UnexpectedValueException;
 use Melanth\Foundation\Application;
 use Melanth\Foundation\Config;
 use Melanth\Foundation\Bootstrap\ConfigurationLoader;
+use Melanth\Foundation\Bootstrap\RegisterFacades;
 use Melanth\Foundation\Bootstrap\RegisterProviders;
 use Melanth\Foundation\Bootstrap\BootProviders;
 
@@ -71,5 +72,10 @@ class BootstrapperTest extends TestCase
             ->method('boot');
 
         $this->assertNull((new BootProviders)->bootstrap($mock));
+    }
+
+    public function testBootstrapFacades()
+    {
+        $this->assertNull((new RegisterFacades)->bootstrap(new Application));
     }
 }
