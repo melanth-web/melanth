@@ -17,7 +17,7 @@ Aftering installing Melanth, the following dirctory configuration you should con
     - routes
 ```
 
-`app` handle al of the incoming HTTP requests entering your web application.
-`bootstrap` stores all app configuration into a cached file to make application load faster.
-`config` define all of your configuration
-`routes` configure static routes to dispatch incoming request to the controller
+- `app` handle al of the incoming HTTP requests entering your web application.
+- `bootstrap` stores all app configuration into a cached file to make application load faster.
+- `config` define all of your configuration
+- `routes` configure static routes to dispatch incoming request to the controller
