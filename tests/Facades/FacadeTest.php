@@ -4,8 +4,11 @@ namespace Melanth\Tests\Facades;
 
 use Exception;
 use RuntimeException;
+use Melanth\Contracts\Routing\Router as RouterContract;
 use Melanth\Facades\Facade;
+use Melanth\Facades\Router as RouterFacade;
 use Melanth\Foundation\Application;
+use Melanth\Routing\Router;
 use Melanth\Tests\Foundation\TestCase;
 
 class FacadeTest extends TestCase

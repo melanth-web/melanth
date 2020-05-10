@@ -4,6 +4,7 @@ namespace Melanth\Routing;
 
 use Closure;
 use Melanth\Container\Container;
+use Mealnth\Contracts\Routing\Router as RouterContract;
 use Melanth\Contracts\Support\Arrayable;
 use Melanth\Http\Request;
 use Melanth\Http\Response;
@@ -11,7 +12,7 @@ use Melanth\Http\Exceptions\NotFoundHttpException;
 use Melanth\Support\Arr;
 use Melanth\Support\Pipeline;
 
-class Router
+class Router implements RouterContract
 {
     /**
      * The dependency container instance.
